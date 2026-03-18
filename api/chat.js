@@ -1,21 +1,13 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
+    if (req.method === 'OPTIONS') return res.status(200).end();
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
     const { question } = req.body;
-
-    if (!question || question.trim().length === 0) {
-        return res.status(400).json({ error: 'Soru boş olamaz.' });
-    }
+    if (!question || !question.trim()) return res.status(400).json({ error: 'Soru boş olamaz.' });
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -27,11 +19,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
             model: 'claude-haiku-4-5-20251001',
             max_tokens: 400,
-            system: `Sen Melih Kaan İnceçayır'ın kişisel portföy sitesindeki yapay zeka asistanısın.
-Melih Kaan, Pamukkale Üniversitesi Bilgisayar Mühendisliği 1. sınıf öğrencisi ve
-Manisa Celal Bayar Üniversitesi Bilgisayar Programcılığı mezunu.
-Bildiği teknolojiler: HTML, CSS, JavaScript, TypeScript, React, Node.js, Python, UI/UX, Figma, Git.
-Türkçe, samimi, kısa yanıtlar ver. Maks 3-4 cümle.`,
+            system: `Sen Melih Kaan İnceçayır'ın kişisel portföy sitesindeki yapay zeka asistanısın. Melih Kaan, Pamukkale Üniversitesi Bilgisayar Mühendisliği 1. sınıf öğrencisi ve Manisa Celal Bayar Üniversitesi Bilgisayar Programcılığı mezunu. Türkçe, samimi, kısa yanıtlar ver. Maks 3-4 cümle.`,
             messages: [{ role: 'user', content: question.trim() }],
         }),
     });
@@ -39,4 +27,4 @@ Türkçe, samimi, kısa yanıtlar ver. Maks 3-4 cümle.`,
     const data = await response.json();
     const answer = data.content?.[0]?.text || 'Yanıt alınamadı.';
     return res.status(200).json({ answer });
-}
+};

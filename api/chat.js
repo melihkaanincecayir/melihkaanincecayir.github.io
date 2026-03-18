@@ -25,6 +25,12 @@ module.exports = async function handler(req, res) {
     });
 
     const data = await response.json();
+
+    // Anthropic'ten hata geldiyse terminale yansıt
+    if (!response.ok) {
+        return res.status(500).json({ error: data.error?.message || JSON.stringify(data) });
+    }
+
     const answer = data.content?.[0]?.text || 'Yanıt alınamadı.';
     return res.status(200).json({ answer });
 };

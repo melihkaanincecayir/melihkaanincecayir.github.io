@@ -373,12 +373,7 @@
                 <p>Modern algoritmalar ve makine öğrenimi modellerinin günlük hayatımızdaki sessiz devrimi üzerine.</p>
                 <a class="btn-magnetic" style="opacity:.5;cursor:default">Yakında →</a>
             </div>
-            <div class="glass-card sound-trigger">
-                <h3>Modern Web'in Temelleri</h3>
-                <p>HTML, CSS ve JavaScript'in 2026'daki durumu ve öğrenmesi gereken yeni konseptler.</p>
-                <a class="btn-magnetic" style="opacity:.5;cursor:default">Yakında →</a>
-            </div>
-        </div>
+                    </div>
     </div>
 
     <!-- ABOUT -->
@@ -396,8 +391,7 @@
         </div>
         <div class="glass-card about-bio">
             <p>Merhaba ben Melih Kaan İnceçayır. Pamukkale Üniversitesi Bilgisayar Mühendisliği 1.sınıf öğrencisiyim.</p>
-	    <p>Aynı zamanda Manisa Celal Bayar Üniversitesi Bilgisayar Programcılığı bölümünden mezun oldum.
-        </div>
+	            </div>
         <div class="skills-section">
             <h3>Teknolojiler</h3>
             <div id="skillsPhysics"></div>
@@ -865,7 +859,7 @@ document.addEventListener('keydown',e=>{
    Command Palette
    ════════════════════════════════════════════ */
 const CMD_ITEMS=[
-    {icon:'⚡',title:'Terminal Aç',desc:'Gizli komutlar için terminali aç (T)',action:()=>toggleTerminal(),shortcut:'T'},
+    {icon:'⚡',title:'Terminal Aç',desc:'Gizli komutlar için terminali aç (T) (Şimdilik masaüstü versiyonu aktiftir)',action:()=>toggleTerminal(),shortcut:'T'},
     {icon:'🤖',title:'AI\'ye Sor',desc:'ask melih "sorun" — terminalde dene',action:()=>{toggleTerminal();setTimeout(()=>{termInput.value='ask melih " "';termInput.focus();},400);}},
     {icon:'🏠',title:'Ana Sayfa',desc:'Portfolio girişine git',action:()=>switchPage('home',document.querySelectorAll('#desktopNav a')[0])},
     {icon:'📝',title:'Yazılarım',desc:'Blog yazılarını görüntüle',action:()=>switchPage('blog',document.querySelectorAll('#desktopNav a')[1])},
